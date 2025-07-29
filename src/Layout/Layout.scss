@@ -1,3 +1,4 @@
+// Variables
 $text-color: #9370db;
 $primary-color: #FFFFFF;
 $secondary-color: #2D3033;
@@ -5,18 +6,32 @@ $secondary-color: #2D3033;
 $primary-font: "Open Sans", serif;
 $secondary-font: "Cardo", serif;
 
-@mixin font ($Fontweight, $FontSize, $LineHeight, $FontFamily: $primary-font) {
+// Breakpoints
+$breakpoint-xxl: 1400px;
+$breakpoint-xl: 1200px;
+$breakpoint-lg: 992px;
+$breakpoint-md: 768px;
+$breakpoint-s: 720px;
+$breakpoint-sm: 576px;
+
+// Mixins
+@mixin font($Fontweight, $FontSize, $LineHeight, $FontFamily: $primary-font) {
   font-weight: $Fontweight;
   font-size: $FontSize;
-  line-height: $LineHeight ;
+  line-height: $LineHeight;
   font-family: $FontFamily;
 }
 
-
+// Base Styles
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 .layout {
@@ -47,6 +62,7 @@ $secondary-font: "Cardo", serif;
   }
 }
 
+// Header Styles
 .header {
   display: flex;
   justify-content: flex-end;
@@ -55,6 +71,8 @@ $secondary-font: "Cardo", serif;
   background-color: var(--bg);
   gap: 55px;
   margin-top: 10px;
+  position: relative;
+  z-index: 10;
 
   &__right {
     display: flex;
@@ -122,7 +140,6 @@ $secondary-font: "Cardo", serif;
     &--up {
       transform: rotate(180deg);
     }
-
   }
 
   &__dropdown {
@@ -142,7 +159,6 @@ $secondary-font: "Cardo", serif;
     align-items: center;
     justify-content: center;
     gap: 10px;
-
   }
 
   &__dropdown button {
@@ -153,13 +169,15 @@ $secondary-font: "Cardo", serif;
     cursor: pointer;
     transition: all 0.2s ease;
     width: 100%;
-  }
+    color: white;
 
-  &__dropdown button:hover {
-    background: rgb(165, 84, 232);
+    &:hover {
+      background: rgb(165, 84, 232);
+    }
   }
 }
 
+// Sidebar Styles
 .sidebar {
   max-width: 240px;
   background-color: var(--bg);
@@ -169,7 +187,9 @@ $secondary-font: "Cardo", serif;
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 1;
+  z-index: 5;
+  height: 100vh;
+  overflow-y: auto;
 
   &__logo-wrapper {
     display: flex;
@@ -208,15 +228,16 @@ $secondary-font: "Cardo", serif;
     display: flex;
     gap: 5px;
     align-items: center;
-  }
 
-  &__link.active,
-  &__link:hover {
-    color: $text-color;
-    @include font(bold, 18px, 15px);
+    &.active,
+    &:hover {
+      color: $text-color;
+      @include font(bold, 18px, 15px);
+    }
   }
 }
 
+// Search Styles
 .search {
   background-color: #f3f3f32f;
   border-radius: 10px;
@@ -302,7 +323,7 @@ $secondary-font: "Cardo", serif;
         border: 1px solid #C3A8FF;
         border-radius: 6px;
         background-color: var(--bg);
-        color: $primary-color ;
+        color: $primary-color;
         transition: all 0.2s ease;
 
         &:focus {
@@ -340,13 +361,7 @@ $secondary-font: "Cardo", serif;
   }
 }
 
-.theme__btn {
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
+// Movie Grid Styles
 .movie__grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -408,7 +423,6 @@ $secondary-font: "Cardo", serif;
     margin: 0;
   }
 
-
   &__fav {
     position: absolute;
     bottom: 20px;
@@ -434,17 +448,14 @@ $secondary-font: "Cardo", serif;
 
     &.green {
       background-color: #2ecc71;
-      /* зелёный */
     }
 
     &.yellow {
       background-color: #f1c40f;
-      /* жёлтый */
     }
 
     &.red {
       background-color: #e74c3c;
-      /* красный */
     }
   }
 
@@ -455,6 +466,7 @@ $secondary-font: "Cardo", serif;
   }
 }
 
+// Form Styles
 .form__container {
   display: flex;
   flex-direction: column;
@@ -484,6 +496,7 @@ $secondary-font: "Cardo", serif;
   border: none;
 }
 
+// Confirmation Styles
 .confirmation {
   border: 1px solid $text-color;
   padding: 30px;
@@ -507,6 +520,7 @@ $secondary-font: "Cardo", serif;
   }
 }
 
+// Success Styles
 .success {
   border: 1px solid $text-color;
   padding: 30px;
@@ -530,6 +544,7 @@ $secondary-font: "Cardo", serif;
   }
 }
 
+// Settings Styles
 .settings {
   &__title {
     @include font(400, 36px, 15px);
@@ -584,6 +599,7 @@ $secondary-font: "Cardo", serif;
   }
 }
 
+// Movie Details Styles
 .movie-details {
   padding: 30px;
 
@@ -663,6 +679,7 @@ $secondary-font: "Cardo", serif;
   }
 }
 
+// Not Found Styles
 .not-found {
   text-align: center;
   padding: 50px;
@@ -702,6 +719,7 @@ $secondary-font: "Cardo", serif;
   }
 }
 
+// Pagination Styles
 .pagination {
   display: flex;
   justify-content: center;
@@ -709,7 +727,6 @@ $secondary-font: "Cardo", serif;
   padding: 5px;
   gap: 10px;
   margin-bottom: 30px;
-
 
   &__btn {
     background-color: $text-color;
@@ -727,6 +744,7 @@ $secondary-font: "Cardo", serif;
   }
 }
 
+// Loading Indicator
 .loading-indicator {
   display: flex;
   align-items: center;
@@ -740,16 +758,6 @@ $secondary-font: "Cardo", serif;
     content: "";
     width: 20px;
     height: 20px;
-    border: 3px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-    border-top-color: #3498db;
-    animation: spin 1s linear infinite;
-  }
-
-  &::after {
-    content: "";
-    width: 20px;
-    height: 20px;
     border: 3px solid rgba(147, 112, 219, 0.2);
     border-radius: 50%;
     border-top-color: #9370db;
@@ -757,7 +765,7 @@ $secondary-font: "Cardo", serif;
   }
 }
 
-/* Состояние "ничего не найдено" */
+// Empty State
 .empty-state {
   text-align: center;
   padding: 30px 20px;
@@ -783,40 +791,9 @@ $secondary-font: "Cardo", serif;
     animation: bounce 1.8s infinite ease-in-out;
     color: #9370db;
   }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes bounce {
-
-    0%,
-    100% {
-      transform: translateY(0) scale(1);
-    }
-
-    50% {
-      transform: translateY(-5px) scale(1.05);
-    }
-  }
-
 }
 
-/* Стили для сообщения об ошибке */
+// Error Message
 .error-message {
   padding: 13px 20px;
   background-color: #e6e6fa;
@@ -836,33 +813,15 @@ $secondary-font: "Cardo", serif;
     content: "⚠️";
     font-size: 1.4rem;
   }
-
-  @keyframes shake {
-
-    0%,
-    100% {
-      transform: translateX(0);
-    }
-
-    20%,
-    60% {
-      transform: translateX(-4px);
-    }
-
-    40%,
-    80% {
-      transform: translateX(4px);
-    }
-  }
 }
 
+// Favorites
 .favorites-container {
   max-width: 1200px;
   display: flex;
   align-items: self-start;
   min-height: 70vh;
   flex-direction: column;
-
 }
 
 .no-favorites {
@@ -890,4 +849,269 @@ $secondary-font: "Cardo", serif;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 25px;
   padding: 10px;
+}
+
+// Mobile Menu Toggle
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: $text-color;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-5px) scale(1.05);
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-4px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+
+// Media Queries
+@media (max-width: $breakpoint-xxl) {
+  .movie__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .search {
+    max-width: 700px;
+    width: 100%;
+  }
+}
+
+@media (max-width: $breakpoint-xl) {
+  .layout {
+    &__content {
+      margin-left: 200px;
+    }
+
+    .search {
+      max-width: 530px;
+      width: 100%;
+    }
+
+    .header {
+      gap: 20px;
+    }
+  }
+
+  .movie__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .movie-details {
+    &__main {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__info {
+      max-width: 100%;
+      padding: 0 20px;
+    }
+  }
+
+  .not-found {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: $breakpoint-lg) {
+  .layout {
+    &__content {
+      margin-left: 0;
+      padding-top: 20px;
+    }
+  }
+
+  .settings__title {
+    font-size: 30px;
+  }
+
+  .settings__info-title {
+    font-size: 16px;
+  }
+
+  .settings__info-subtitle {
+    font-size: 14px;
+  }
+
+  .settings__toggle {
+    font-size: 20px;
+  }
+
+  .header__dropdown {
+    width: 200px;
+    right: -20px;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+
+    &--open {
+      transform: translateX(0);
+    }
+  }
+
+  .movie__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .sidebar-toggle {
+    display: block;
+  }
+
+  .search__filters {
+    width: 270px;
+    padding: 12px;
+
+    label {
+      font-size: 14px;
+      margin-bottom: 9px;
+    }
+
+    input,
+    select {
+      padding: 11px 10px;
+    }
+  }
+
+  .search__btn {
+    padding: 12px 15px;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .header {
+    padding: 12px 20px;
+    gap: 20px;
+
+  }
+
+  .search {
+    max-width: 100%;
+
+    &__filters {
+      width: 250px;
+    }
+  }
+
+  .form__container {
+    width: 90%;
+    padding: 20px 15px;
+  }
+}
+
+@media (max-width: $breakpoint-s) {
+  .movie__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .search{
+    max-width: 300px;
+    width: 100%;
+  }
+ .header__name {
+    @include font(400, 12px, 15px);
+  }
+
+  .header__initials {
+    height: 24px;
+    width: 24px;
+    padding: 17px;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .movie__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .movie-card {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .confirmation,
+  .success {
+    width: 90%;
+    margin-top: 30px;
+    padding: 20px;
+  }
+
+  .not-found {
+    margin-top: 50px;
+    padding: 20px;
+
+    &__title {
+      font-size: 24px;
+    }
+
+    &__text {
+      font-size: 16px;
+    }
+  }
+
+  .movie-details {
+    padding: 15px;
+
+    &__main {
+      gap: 15px;
+    }
+
+    &__title {
+      font-size: 24px;
+    }
+  }
 }
