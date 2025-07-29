@@ -1,19 +1,25 @@
-import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../store/slices/authSlice';
 import { Success } from '../Components/Forms/Success';
 import { SignInForm } from '../Components/Forms/SignInForm';
+import { useState } from 'react';
 
-function SignInPage() {
+export default function SignInPage() {
   const [signedIn, setSignedIn] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleSignIn = () => {
+    dispatch(signIn());
+    setSignedIn(true);
+  };
 
   return (
     <>
       {signedIn ? (
         <Success onClick={() => setSignedIn(false)} />
       ) : (
-        <SignInForm onClick={() => setSignedIn(true)} />
+        <SignInForm onClick={handleSignIn} />
       )}
     </>
   );
 }
-
-export default SignInPage;
