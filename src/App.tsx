@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/HomePage/HomePage';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import SettingsPage from './pages/SettingsPage';
@@ -11,6 +11,7 @@ import TrendsPage from './pages/TrendsPage';
 import PrivateRoute from './utils/PrivateRoute';
 
 export default function App() {
+    
   return (
 
     <Routes>
@@ -21,23 +22,17 @@ export default function App() {
         <Route path="/signin" element={<SignInPage />} />
         <Route path="/signup" element={<SignUpPage />} />
 
-        <Route
-          path="/favorites"
-          element={
-            <PrivateRoute>
-              <FavoriteMoviesPage />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/favorites" element={
+          <PrivateRoute>
+            <FavoriteMoviesPage />
+          </PrivateRoute>
+        } />
 
-        <Route
-          path="/settings"
-          element={
-            <PrivateRoute>
-              <SettingsPage />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/settings" element={
+          <PrivateRoute>
+            <SettingsPage />
+          </PrivateRoute>
+        } />
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>

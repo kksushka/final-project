@@ -20,8 +20,8 @@ export const fetchMoviesBySearch = async (
     params.y = year;
   }
 
-  if (type) {
-    params.type = type;
+  if ((type || '').length > 0) {
+    params.type = type!;
   }
 
   const response = await axios.get(BASE_URL, { params });

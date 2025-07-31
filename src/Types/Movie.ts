@@ -1,4 +1,4 @@
-export type MovieType = 'movie' | 'series' | 'episode';
+export type MovieType = 'movie' | 'series' | 'episode' | 'game';
 
 export interface Movie {
   Title: string;    

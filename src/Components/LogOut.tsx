@@ -1,19 +1,19 @@
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router';
-import { logout } from '../store/slices/authSlice';
+// import { useDispatch } from 'react-redux';
+// import { useNavigate } from 'react-router';
+// import { logout } from '../store/slices/authSlice';
 
- export default function LogoutButton() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+//  export default function LogoutButton() {
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    dispatch(logout());
-    navigate('/signin');
-  };
+//   const handleLogout = () => {
+//     dispatch(logout());
+//     navigate('/signin');
+//   };
 
-  return (
-    <button onClick={handleLogout} className="logout-btn">
-      Logout
-    </button>
-  );
-}
+//   return (
+//     <button onClick={handleLogout} className="logout-btn">
+//       Logout
+//     </button>
+//   );
+// }

@@ -8,7 +8,6 @@ export default function Theme() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
   }, [theme]);
 
