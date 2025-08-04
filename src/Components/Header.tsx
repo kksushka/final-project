@@ -37,7 +37,6 @@ export default function Header() {
           {dropdownOpen && (
             <div className="header__dropdown">
               <button onClick={() => navigate('/signin')}>Sign In</button>
-              <button onClick={() => navigate('/signup')}>Sign Up</button>
             </div>
           )}
         </div>
