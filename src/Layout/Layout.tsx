@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 import './Layout.scss';
-import Header from '../Components/Header';
 import Sidebar from '../Components/SideBar';
 import type { RootState } from '../store/store';
 import { useEffect } from 'react';
 import { Outlet } from 'react-router';
+import Header from '../Components/Header';
 
 export default function Layout() {
   const theme = useSelector((state: RootState) => state.theme.mode);

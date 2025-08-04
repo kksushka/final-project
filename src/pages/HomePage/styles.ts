@@ -22,7 +22,7 @@ export const ErrorMessage = styled.div`
     }
  `;
 
- export const ErrorMessageContainer = styled.div`
+export const ErrorMessageContainer = styled.div`
     display: inline-flex;
     justify-content: center;
     width: 100%;

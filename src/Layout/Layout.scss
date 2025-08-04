@@ -1,4 +1,4 @@
-// Variables
+
 $text-color: #9370db;
 $primary-color: #FFFFFF;
 $secondary-color: #2D3033;
@@ -6,7 +6,6 @@ $secondary-color: #2D3033;
 $primary-font: "Open Sans", serif;
 $secondary-font: "Cardo", serif;
 
-// Breakpoints
 $breakpoint-xxl: 1400px;
 $breakpoint-xl: 1200px;
 $breakpoint-lg: 992px;
@@ -14,7 +13,7 @@ $breakpoint-md: 768px;
 $breakpoint-s: 720px;
 $breakpoint-sm: 576px;
 
-// Mixins
+
 @mixin font($Fontweight, $FontSize, $LineHeight, $FontFamily: $primary-font) {
   font-weight: $Fontweight;
   font-size: $FontSize;
@@ -22,7 +21,6 @@ $breakpoint-sm: 576px;
   font-family: $FontFamily;
 }
 
-// Base Styles
 * {
   margin: 0;
   padding: 0;
@@ -62,7 +60,6 @@ body {
   }
 }
 
-// Header Styles
 .header {
   display: flex;
   justify-content: flex-end;
@@ -177,7 +174,6 @@ body {
   }
 }
 
-// Sidebar Styles
 .sidebar {
   max-width: 240px;
   background-color: var(--bg);
@@ -237,7 +233,6 @@ body {
   }
 }
 
-// Search Styles
 .search {
   background-color: #f3f3f32f;
   border-radius: 10px;
@@ -361,7 +356,6 @@ body {
   }
 }
 
-// Movie Grid Styles
 .movie__grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -466,7 +460,6 @@ body {
   }
 }
 
-// Form Styles
 .form__container {
   display: flex;
   flex-direction: column;
@@ -496,7 +489,6 @@ body {
   border: none;
 }
 
-// Confirmation Styles
 .confirmation {
   border: 1px solid $text-color;
   padding: 30px;
@@ -520,7 +512,6 @@ body {
   }
 }
 
-// Success Styles
 .success {
   border: 1px solid $text-color;
   padding: 30px;
@@ -544,7 +535,6 @@ body {
   }
 }
 
-// Settings Styles
 .settings {
   &__title {
     @include font(400, 36px, 15px);
@@ -599,13 +589,13 @@ body {
   }
 }
 
-// Movie Details Styles
 .movie-details {
   padding: 30px;
 
   &__btn {
     display: flex;
     justify-content: end;
+    margin-bottom: 10px;
   }
 
   &__back-btn {
@@ -679,7 +669,6 @@ body {
   }
 }
 
-// Not Found Styles
 .not-found {
   text-align: center;
   padding: 50px;
@@ -719,7 +708,6 @@ body {
   }
 }
 
-// Pagination Styles
 .pagination {
   display: flex;
   justify-content: center;
@@ -744,7 +732,6 @@ body {
   }
 }
 
-// Loading Indicator
 .loading-indicator {
   display: flex;
   align-items: center;
@@ -765,7 +752,6 @@ body {
   }
 }
 
-// Empty State
 .empty-state {
   text-align: center;
   padding: 30px 20px;
@@ -793,7 +779,6 @@ body {
   }
 }
 
-// Error Message
 .error-message {
   padding: 13px 20px;
   background-color: #e6e6fa;
@@ -822,7 +807,6 @@ body {
   font-size: 1.7em;
 }
 
-// Favorites
 .favorites-container {
   max-width: 1200px;
   display: flex;
@@ -858,7 +842,6 @@ body {
   padding: 10px;
 }
 
-// Mobile Menu Toggle
 .sidebar-toggle {
   display: none;
   position: fixed;
@@ -874,7 +857,6 @@ body {
   font-size: 20px;
 }
 
-// Animations
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -923,7 +905,6 @@ body {
   }
 }
 
-// Media Queries
 @media (max-width: $breakpoint-xxl) {
   .movie__grid {
     grid-template-columns: repeat(4, 1fr);
