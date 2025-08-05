@@ -10,7 +10,6 @@ const DEBOUNCE_DELAY = 500;
 
 export default function SearchInput() {
   const dispatch = useDispatch<AppDispatch>();
-
   const navigate = useNavigate();
   const location = useLocation();
   const [query, setQuery] = useState('');
