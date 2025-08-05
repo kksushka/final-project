@@ -15,7 +15,7 @@ export default function Header({ toggleSidebar }: HeaderProps) {
   const dispatch = useDispatch();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const { name, surname } = useSelector((state: RootState) => state.auth);
+  const { isAuthenticated, name, surname } = useSelector((state: RootState) => state.auth);
   const initials = `${name[0] ?? ''}${surname[0] ?? ''}`.toUpperCase();
 
   const toggleDropdown = () => setDropdownOpen(prev => !prev);
@@ -58,8 +58,13 @@ export default function Header({ toggleSidebar }: HeaderProps) {
 
           {dropdownOpen && (
             <div className="header__dropdown">
-              <button onClick={() => navigate('/signin')}>Sign In</button>
-              <button onClick={handleSignOut}>Sign Out</button>
+              {!isAuthenticated ? (
+                <button onClick={() => navigate('/signin')}>Sign In</button>
+              ) : (
+                <>
+                  <button onClick={handleSignOut}>Sign Out</button>
+                </>
+              )}
             </div>
           )}
         </div>
