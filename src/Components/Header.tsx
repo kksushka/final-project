@@ -5,7 +5,11 @@ import { signOut } from '../store/slices/authSlice';
 import SearchInput from './Search/SearchInput';
 import type { RootState } from '../store/store';
 
-export default function Header() {
+interface HeaderProps {
+  toggleSidebar: () => void;
+}
+
+export default function Header({ toggleSidebar }: HeaderProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,6 +39,9 @@ export default function Header() {
   return (
     <div className='header-wrapper'>
       <header className="header">
+        <button className="sidebar-toggle" onClick={toggleSidebar}>
+          ☰
+        </button>
         <div className="sidebar__logo-wrapper">
           <p className='sidebar__logo'><span className='sidebar__logo-span'>pix</span>ema</p>
         </div>
