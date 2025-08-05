@@ -10,7 +10,7 @@ import TrendsPage from './pages/TrendsPage';
 import PrivateRoute from './utils/PrivateRoute';
 
 export default function App() {
-    
+
   return (
 
     <Routes>
@@ -31,9 +31,8 @@ export default function App() {
             <SettingsPage />
           </PrivateRoute>
         } />
-
-        <Route path="*" element={<NotFoundPage />} />
       </Route>
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
 
   );
