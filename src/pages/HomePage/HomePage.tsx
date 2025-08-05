@@ -7,17 +7,17 @@ import { useEffect } from 'react';
 
 export default function HomePage() {
   const dispatch = useDispatch<AppDispatch>();
-  const { 
-    movies, 
-    state, 
-    error, 
+  const {
+    movies,
+    state,
+    error,
     total,
     movieQuery,
-    currentPage 
+    currentPage
   } = useSelector((state: RootState) => state.movies);
 
   useEffect(() => {
-      dispatch(getMovies({ query: movieQuery, page: currentPage }));
+    dispatch(getMovies({ query: movieQuery, page: currentPage }));
   }, []);
 
   const handlePageChange = (page: number) => {
@@ -31,7 +31,7 @@ export default function HomePage() {
           Loading...
         </div>
       )}
-      
+
       {state === 'failed' && (
         <ErrorMessageContainer>
           <ErrorMessage>
@@ -47,12 +47,14 @@ export default function HomePage() {
           totalPages={Math.ceil(total / 10)}
           onPageChange={handlePageChange}
         />
-        )}
-      
+      )}
+
       {
         state === 'init' && (
-          <div className='welcome-message'>
-            Welcome! To start explore movies type something in search bar.
+          <div className='welcome-message-wrapper'>
+            <p className='welcome-message'>
+              Welcome! To start explore movies type something in search bar.
+            </p>
           </div>
         )
       }

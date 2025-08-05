@@ -80,7 +80,7 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 18px 27px;
+  padding: 18px 28px;
   background-color: transparent;
   gap: 68px;
   margin-top: 10px;
@@ -137,7 +137,7 @@ body {
     height: 12px;
     margin-left: 8px;
     transition: transform 0.2s ease;
-    flex-shrink: 0; 
+    flex-shrink: 0;
 
     &--open {
       transform: rotate(180deg);
@@ -168,8 +168,8 @@ body {
 
   &__dropdown {
     position: absolute;
-    top: 140%;
-    right: -40px;
+    top: 128%;
+    right: -23px;
     width: 260px;
     background-color: $text-color;
     border: 1px solid #C3A8FF;
@@ -221,7 +221,7 @@ body {
 .sidebar {
   max-width: 240px;
   background-color: var(--bg);
-  padding: 24px 16px;
+  padding: 24px 20px;
   box-sizing: border-box;
   width: 100%;
   position: fixed;
@@ -230,7 +230,7 @@ body {
   z-index: 5;
   height: 100vh;
   overflow-y: auto;
-  margin-top: 100px;
+  margin-top: 90px;
 
   &__logo-wrapper {
     display: flex;
@@ -238,7 +238,7 @@ body {
     justify-content: center;
     max-width: 150px;
     width: 100%;
-    margin-left: 20px;
+    margin-left: 18px;
   }
 
   &__logo {
@@ -873,10 +873,17 @@ body {
 }
 
 .welcome-message {
-  margin: 50px auto;
   text-align: center;
   font-family: monospace;
   font-size: 1.7em;
+  margin: 10px 0;
+
+  &-wrapper {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left: 55px;
+  }
 }
 
 .favorites-container {
@@ -1037,6 +1044,13 @@ body {
 
     .welcome-message {
       font-size: 18px;
+
+      &-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+      }
     }
   }
 
@@ -1122,6 +1136,24 @@ body {
   .sidebar__logo-wrapper {
     margin-left: 0;
   }
+
+  .sidebar {
+    max-width: 200px;
+
+    &__nav {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    &__link {
+      font-size: 16px;
+    }
+  }
+
+  .welcome-message-wrapper {
+    margin-left: 0;
+  }
 }
 
 @media (max-width: $breakpoint-s) {
@@ -1152,6 +1184,10 @@ body {
 
   .welcome-message {
     font-size: 16px;
+
+    &-wrapper {
+      margin-left: 0;
+    }
   }
 }
 
@@ -1196,6 +1232,14 @@ body {
     &__title {
       font-size: 24px;
     }
+
+    &__meta {
+      font-size: 14px;
+    }
+
+    &__poster-wrapper {
+      max-width: 350px;
+    }
   }
 
   .layout {
@@ -1215,6 +1259,10 @@ body {
 
     .sidebar__logo {
       display: none;
+    }
+
+    .welcome-message-wrapper {
+      margin-left: 0;
     }
   }
 
