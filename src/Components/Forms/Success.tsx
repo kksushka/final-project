@@ -13,9 +13,9 @@ export function Success({ onClick }: SuccessProps) {
   };
 
   return (
-    <div className="success">
-      <p className="success__text">Nice to see you again!</p>
-      <button onClick={handleClick} className="success__btn">Go home</button>
+    <div className="form__success">
+      <p className="form__success__text">Nice to see you again!</p>
+      <button onClick={handleClick} className="form__success__btn">Go home</button>
     </div>
   );
 }

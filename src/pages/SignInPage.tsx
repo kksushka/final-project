@@ -8,8 +8,8 @@ export default function SignInPage() {
   const [signedIn, setSignedIn] = useState(false);
   const dispatch = useDispatch();
 
-  const handleSignIn = () => {
-    dispatch(signIn());
+  const handleSignIn = (formData: { name: string; surname: string }) => {
+    dispatch(signIn(formData));
     setSignedIn(true);
   };
 
@@ -18,7 +18,7 @@ export default function SignInPage() {
       {signedIn ? (
         <Success onClick={() => setSignedIn(false)} />
       ) : (
-        <SignInForm onClick={handleSignIn} />
+        <SignInForm onSubmit={handleSignIn} />
       )}
     </>
   );
