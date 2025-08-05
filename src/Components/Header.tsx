@@ -35,6 +35,9 @@ export default function Header() {
   return (
     <div className='header-wrapper'>
       <header className="header">
+        <div className="sidebar__logo-wrapper">
+          <p className='sidebar__logo'><span className='sidebar__logo-span'>pix</span>ema</p>
+        </div>
         <SearchInput />
         <div className="header__right" ref={dropdownRef}>
           <div className="header__user" onClick={toggleDropdown}>

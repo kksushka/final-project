@@ -4,9 +4,6 @@ export default function Sidebar() {
     return (
     
         <aside className="sidebar">
-            <div className="sidebar__logo-wrapper">
-                <p className='sidebar__logo'><span className='sidebar__logo-span'>pix</span>ema</p>
-            </div>
             <nav className="sidebar__nav">
                 <NavLink to="/" className="sidebar__link">
                     <svg className='sidebar__icon' width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

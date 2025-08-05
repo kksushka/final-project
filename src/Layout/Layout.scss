@@ -38,6 +38,7 @@ body {
 
   &__body {
     display: flex;
+    padding-top: 80px; // Добавьте отступ сверху равный высоте header
   }
 
   &__content {
@@ -63,12 +64,22 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  padding: 18px 40px;
+  padding: 18px 27px;
   background-color: var(--bg);
-  gap: 55px;
+  gap: 69px;
   margin-top: 10px;
   position: relative;
   z-index: 10;
+
+  &-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(var(--bg), 1); // используйте rgba с прозрачностью
+    backdrop-filter: blur(3px); // легкое размытие
+  }
 
   &__right {
     display: flex;
@@ -185,6 +196,7 @@ body {
   z-index: 5;
   height: 100vh;
   overflow-y: auto;
+  margin-top: 110px;
 
   &__logo-wrapper {
     display: flex;
@@ -192,9 +204,7 @@ body {
     justify-content: center;
     max-width: 150px;
     width: 100%;
-    margin-top: 23px;
-    margin-bottom: 55px;
-    margin-left: 26px;
+    margin-left: 20px;
   }
 
   &__logo {
@@ -233,7 +243,7 @@ body {
 }
 
 .search {
-  background-color: #f3f3f32f;
+  background-color: var(--bg);
   border-radius: 10px;
   max-width: 940px;
   width: 100%;
@@ -910,7 +920,7 @@ body {
     }
 
     .header {
-      gap: 20px;
+      gap: 87px;
     }
   }
 
@@ -933,6 +943,9 @@ body {
   .not-found {
     margin-right: 0;
   }
+    .sidebar__logo-wrapper {
+    margin-left: 0; 
+}
 }
 
 @media (max-width: $breakpoint-lg) {
@@ -941,6 +954,17 @@ body {
       margin-left: 0;
       padding-top: 20px;
     }
+
+    .header {
+      gap: 20px;
+    }
+
+    .sidebar__logo {
+      font-size: 28px;
+    }
+    .welcome-message {
+    font-size: 18px;
+}
   }
 
   .settings__title {
@@ -1021,6 +1045,9 @@ body {
     width: 90%;
     padding: 20px 15px;
   }
+    .sidebar__logo-wrapper {
+    margin-left: 0; 
+}
 }
 
 @media (max-width: $breakpoint-s) {
@@ -1042,6 +1069,13 @@ body {
     width: 24px;
     padding: 17px;
   }
+
+  .sidebar__logo-wrapper {
+    margin-left: 0;
+  }
+      .welcome-message {
+    font-size: 16px;
+}
 }
 
 @media (max-width: $breakpoint-sm) {
@@ -1085,5 +1119,20 @@ body {
     &__title {
       font-size: 24px;
     }
+  }
+
+  .layout {
+    .search {
+      max-width: 300px;
+      width: 100%;
+    }
+
+    .header {
+      gap: 20px;
+    }
+  }
+
+  .sidebar__logo-wrapper {
+    margin-left: 0;
   }
 }
