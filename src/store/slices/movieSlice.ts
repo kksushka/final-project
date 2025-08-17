@@ -1,11 +1,16 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchMoviesBySearch } from '../../api/omdbApi';
 import type { Movie } from '../../Types/Movie';
+import { DefaultMovieQuery, type MovieQuery } from '../../Types/MovieQuery';
+
+export type MovieStateType = 'init' | 'loading' | 'failed' | 'loaded'
 
 interface MovieState {
   movies: Movie[];
+  favoritMovies: Movie[],
+  movieQuery: MovieQuery;
   total: number;
-  loading: boolean;
+  state: MovieStateType;
   error: string | null;
   currentQuery: string;
   currentPage: number;
@@ -13,8 +18,10 @@ interface MovieState {
 
 const initialState: MovieState = {
   movies: [],
+  favoritMovies: [],
+  movieQuery: DefaultMovieQuery,
   total: 0,
-  loading: false,
+  state: 'init',
   error: null,
   currentQuery: '',
   currentPage: 1,
@@ -22,15 +29,15 @@ const initialState: MovieState = {
 
 export const getMovies = createAsyncThunk<
   { movies: Movie[]; total: number; query: string; page: number },
-  { query: string; page: number; year?: string; type?: string },
+  { query: MovieQuery; page: number; },
   { rejectValue: string }
->('movies/getMovies', async ({ query, page, year, type }, { rejectWithValue }) => {
+>('movies/getMovies', async ({ query, page }, { rejectWithValue }) => {
   try {
-    const data = await fetchMoviesBySearch(query, page, year, type);
+    const data = await fetchMoviesBySearch(query.title, page, query.year, query.type);
     return {
       movies: data.Search || [],
       total: parseInt(data.totalResults) || 0,
-      query,
+      query: query.title,
       page,
     };
   } catch (error) {
@@ -47,8 +54,18 @@ const movieSlice = createSlice({
   reducers: {
     toggleFavorite(state, action: { payload: string }) {
       const movie = state.movies.find(m => m.imdbID === action.payload);
+      
       if (movie) {
         movie.isFavorite = !movie.isFavorite;
+      }
+
+      if (movie?.isFavorite){
+        state.favoritMovies.push(movie);
+      } else {
+        const favIndex = state.favoritMovies.findIndex(m => m.imdbID == action.payload);
+        if (favIndex >= 0){
+          state.favoritMovies.splice(favIndex, 1);
+        }
       }
     },
     clearError(state) {
@@ -56,20 +73,26 @@ const movieSlice = createSlice({
     },
     resetToDefault(state) {
       state.currentQuery = '';
-      state.loading = false;
+      state.movieQuery = DefaultMovieQuery;
+      state.state = 'init';
       state.error = null;
+      state.currentPage = 1;
+    },
+    setMovieQuery(state, action: { payload: MovieQuery}) {
+      state.movieQuery = action.payload;
+      state.currentPage = 1;
     }
   },
   extraReducers: builder => {
     builder
       .addCase(getMovies.pending, (state) => {
-        state.loading = true;
+        state.state = 'loading';
         state.error = null;
       })
       .addCase(getMovies.fulfilled, (state, action) => {
         const moviesWithRatings = action.payload.movies.map((movie) => ({
           ...movie,
-          isFavorite: false,
+          isFavorite: state.favoritMovies.findIndex(m => m.imdbID == movie.imdbID) >= 0,
           rating: parseFloat((Math.random() * 9 + 1).toFixed(1)), 
         }));
 
@@ -77,14 +100,23 @@ const movieSlice = createSlice({
         state.total = action.payload.total;
         state.currentQuery = action.payload.query;
         state.currentPage = action.payload.page;
-        state.loading = false;
+        state.state = 'loaded';
       })
       .addCase(getMovies.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload ?? 'Error fetching movies';
+        state.state = 'failed';
+        state.error = action.payload || 'Error fetching movies';
+        if (state.error.toLowerCase().startsWith('too many results')){
+          state.error = 'Please provide more accurate request';
+        }
+        if (state.error.toLowerCase().startsWith('incorrect imdb id') && state.movieQuery.title.length == 0 
+          && (state.movieQuery.type || '').length == 0 && (state.movieQuery.year || '').length == 0){
+          state.state = 'init'; //hack for broken omdbAPI api for empty search string
+        } else if (state.error.toLowerCase().startsWith('incorrect imdb id')){
+          state.error = 'Please provide more accurate request';
+        }
       });
   },
 });
 
-export const { toggleFavorite, clearError, resetToDefault } = movieSlice.actions;
+export const { toggleFavorite, clearError, resetToDefault, setMovieQuery} = movieSlice.actions;
 export default movieSlice.reducer;

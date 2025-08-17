@@ -1,8 +1,9 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import type { Movie } from '../Types/Movie';
 import { toggleFavorite } from '../store/slices/movieSlice';
 import { useCallback } from 'react';
+import type { RootState } from '../store/store';
 
 interface MovieProps {
   movie: Movie;
@@ -11,6 +12,7 @@ interface MovieProps {
 export default function MovieCard({ movie }: MovieProps) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
 
   const handleClick = useCallback(() => {
     navigate(`/movie/${movie.imdbID}`);
@@ -22,10 +24,10 @@ export default function MovieCard({ movie }: MovieProps) {
         {movie.rating && (
           <div
             className={`movie-card__bookmark ${movie.rating >= 8
-                ? 'green'
-                : movie.rating >= 5
-                  ? 'yellow'
-                  : 'red'
+              ? 'green'
+              : movie.rating >= 5
+                ? 'yellow'
+                : 'red'
               }`}
           >
             <span className="movie-card__rating">{movie.rating}</span>
@@ -51,12 +53,15 @@ export default function MovieCard({ movie }: MovieProps) {
         </div>
       </div>
 
-      <button
-        className="movie-card__fav"
-        onClick={() => dispatch(toggleFavorite(movie.imdbID))}
-      >
-        {movie.isFavorite ? '★' : '☆'}
-      </button>
+      {isAuthenticated && (
+        <button
+          className="movie-card__fav"
+          onClick={() => dispatch(toggleFavorite(movie.imdbID))}
+        >
+          {movie.isFavorite ? '★' : '☆'}
+        </button>
+      )}
     </div>
   );
 }
+

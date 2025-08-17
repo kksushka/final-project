@@ -13,16 +13,19 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
     "@reduxjs/toolkit": "^2.8.2",
     "axios": "^1.11.0",
     "lodash": "^4.17.21",
-    "node-sass": "^9.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.62.0",
     "react-redux": "^9.2.0",
     "react-router": "^7.7.0",
     "redux": "^5.0.1",
-    "use-debounce": "^10.0.5"
+    "sass": "^1.89.2",
+    "use-debounce": "^10.0.5",
+    "zod": "^4.0.14"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
@@ -32,6 +35,7 @@
     "@types/lodash": "^4.17.20",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "@types/styled-components": "^5.1.34",
     "@vitejs/plugin-react": "^4.6.0",
     "eslint": "^9.30.1",
     "eslint-plugin-react-hooks": "^5.2.0",
@@ -40,6 +44,7 @@
     "jsdom": "^26.1.0",
     "redux-mock-store": "^1.5.5",
     "sass-embedded": "^1.89.2",
+    "styled-components": "^6.1.19",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.35.1",
     "vite": "^7.0.4",

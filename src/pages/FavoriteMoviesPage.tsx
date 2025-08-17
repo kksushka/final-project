@@ -3,10 +3,9 @@ import type { RootState } from '../store/store';
 import MovieCard from '../Components/MovieCard';
 
 export default function FavoriteMovies() {
-  const { movies, loading, error } = useSelector((state: RootState) => state.movies);
-  const favorites = movies.filter(movie => movie.isFavorite);
+  const { favoritMovies, state, error } = useSelector((state: RootState) => state.movies);
 
-  if (loading) {
+  if (state === 'loading') {
     return (
       <div className="favorites-container">
         <div className="loading-indicator">Loading...</div>
@@ -14,7 +13,7 @@ export default function FavoriteMovies() {
     );
   }
 
-  if (error) {
+  if (state === 'failed') {
     return (
       <div className="favorites-container">
         <div className="error-message">{error}</div>
@@ -25,7 +24,7 @@ export default function FavoriteMovies() {
   return (
     <div className="favorites-container">
       
-      {favorites.length === 0 ? (
+      {favoritMovies.length === 0 ? (
         <div className="no-favorites">
           <p>You don't have any favorite movies yet...</p>
           <p>Click the star icon on movie cards to add them to favorites.</p>
@@ -33,10 +32,10 @@ export default function FavoriteMovies() {
       ) : (
         <>
           <div className="favorites-count">
-            {favorites.length} {favorites.length === 1 ? 'movie' : 'movies'} in favorites
+            {favoritMovies.length} {favoritMovies.length === 1 ? 'movie' : 'movies'} in favorites
           </div>
           <div className="movie__grid">
-            {favorites.map(movie => (
+            {favoritMovies.map(movie => (
               <MovieCard key={movie.imdbID} movie={movie} />
             ))}
           </div>

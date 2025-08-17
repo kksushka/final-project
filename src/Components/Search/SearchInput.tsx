@@ -1,32 +1,30 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getMovies, clearError, resetToDefault } from '../../store/slices/movieSlice';
+import { getMovies, resetToDefault, setMovieQuery } from '../../store/slices/movieSlice';
 import type { AppDispatch, RootState } from '../../store/store';
 import { debounce } from 'lodash';
+import type { MovieType } from '../../Types/Movie';
+import { useLocation, useNavigate } from 'react-router';
 
 const DEBOUNCE_DELAY = 500;
 
 export default function SearchInput() {
   const dispatch = useDispatch<AppDispatch>();
-
+  const navigate = useNavigate();
+  const location = useLocation();
   const [query, setQuery] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [yearFilter, setYearFilter] = useState('');
-  const [typeFilter, setTypeFilter] = useState<'movie' | 'series' | 'episode' | 'game' | ''>('');
+  const [typeFilter, setTypeFilter] = useState<MovieType | ''>('');
 
-  const { error } = useSelector((state: RootState) => state.movies);
+  const { movieQuery, currentPage } = useSelector((state: RootState) => state.movies);
   const filterRef = useRef<HTMLDivElement>(null);
 
   const performSearch = useCallback(
-    (query: string, year: string, type: string) => {
+    (query: string, year: string, type: MovieType | '') => {
       const trimmedQuery = query.trim();
       if (trimmedQuery || year || type) {
-        dispatch(getMovies({
-          query: trimmedQuery,
-          page: 1,
-          year: year || undefined,
-          type: type || undefined,
-        }));
+        dispatch(setMovieQuery({ title: trimmedQuery, year: year, type: type}));
       } else {
         dispatch(resetToDefault());
       }
@@ -35,11 +33,19 @@ export default function SearchInput() {
   );
 
   const debouncedSearch = useCallback(
-    debounce((q: string, y: string, t: string) => {
+    debounce((q: string, y: string, t: MovieType | '') => {
       performSearch(q, y, t);
     }, DEBOUNCE_DELAY),
     [performSearch]
   );
+
+  useEffect(() => {
+      if (location.pathname == '/'){
+          dispatch(getMovies({query: movieQuery, page: currentPage}));
+      } else {
+        navigate('/');
+      }
+  }, [movieQuery, currentPage])
 
   useEffect(() => {
     if (query.trim()) {
@@ -49,10 +55,6 @@ export default function SearchInput() {
     }
     return () => debouncedSearch.cancel();
   }, [query]);
-
-  useEffect(() => {
-    if (error) dispatch(clearError());
-  }, [error, dispatch]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

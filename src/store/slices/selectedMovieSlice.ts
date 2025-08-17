@@ -16,12 +16,21 @@ const initialState: State = {
 
 export const fetchMovieById = createAsyncThunk(
   'selectedMovie/fetchById',
-  async (imdbID: string) => {
-    const response = await axios.get(`https://www.omdbapi.com/?apikey=35b30234&i=${imdbID}&plot=full`);
-    if (response.data.Response === 'False') {
-      throw new Error(response.data.Error);
+  async (imdbID: string, { rejectWithValue }) => { 
+    try { 
+      const response = await axios.get(`https://www.omdbapi.com/?apikey=35b30234&i=${imdbID}&plot=full`);
+      
+      if (response.data.Response === 'False') {
+        return rejectWithValue(response.data.Error); 
+      }
+      
+      return response.data;
+    } catch (error) {
+      if (axios.isAxiosError(error)) { 
+        return rejectWithValue(error.message);
+      }
+      return rejectWithValue('An unknown error occurred');
     }
-    return response.data;
   }
 );
 
@@ -42,7 +51,7 @@ const selectedMovieSlice = createSlice({
       })
       .addCase(fetchMovieById.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || 'Error fetching movie';
+        state.error = action.payload as string || 'Error fetching movie'; 
       });
   },
 });
